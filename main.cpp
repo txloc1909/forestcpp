@@ -1,5 +1,22 @@
-#include <ios>
 #include <iostream>
+
+const std::string DELIM = " | ";
+
+struct CustomObj {
+    int id;
+    std::string name;
+
+    CustomObj() = default;
+    CustomObj(int id_, const std::string &name_): id(id_), name(name_) {};
+    CustomObj(int id_) : CustomObj(id_, "") {};
+    CustomObj(std::string& name) : CustomObj(0, name) {};
+    CustomObj(const std::string&& name) : CustomObj(0, name) {};
+};
+
+std::ostream& operator<<(std::ostream& os, const CustomObj& obj) {
+    os << obj.id << DELIM << obj.name;
+    return os;
+}
 
 template<typename T>
 struct Node {
@@ -17,12 +34,12 @@ struct Node {
     }
 
     void print_out() {
-        std::cout << value << ";";
+        std::cout << value << DELIM;
         if (left) {
-            std::cout << left->value << ";";
+            std::cout << left->value << DELIM;
         }
         if (right) {
-            std::cout << right->value << ";";
+            std::cout << right->value << DELIM;
         }
         std::cout << "\n";
     };
@@ -42,5 +59,13 @@ int main() {
     x.print_out();
     y.print_out();
     z.print_out();
+
+    CustomObj obj1{"name1"};
+    CustomObj obj2{20, "name2"};
+    CustomObj obj3{30};
+    std::cout << obj1 << "\n";
+    std::cout << obj2 << "\n";
+    std::cout << obj3 << "\n";
+
     return 0;
 }
