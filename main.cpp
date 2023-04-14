@@ -33,32 +33,37 @@ struct Node {
         value = val; left = l; right = r;
     }
 
-    void print_out() {
-        std::cout << value << DELIM;
-        if (left) {
-            std::cout << left->value << DELIM;
-        }
-        if (right) {
-            std::cout << right->value << DELIM;
-        }
-        std::cout << "\n";
-    };
 };
+
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const Node<T>& node) {
+    os << node.value << DELIM;
+    if (node.left) {
+        os << node.left->value;
+    }
+    os << DELIM;
+    if (node.right) {
+        os << node.right->value;
+    }
+    os << DELIM;
+    return os;
+}
+
 
 int main() {
     Node<double> a(1.2f);
     Node<double> b(1.0f);
     Node<double> c(2.0f, &a, &b);
-    a.print_out();
-    b.print_out();
-    c.print_out();
+    std::cout << a << "\n";
+    std::cout << b << "\n";
+    std::cout << c << "\n";
 
     Node<std::string> x("xyz");
     Node<std::string> y("abc");
     Node<std::string> z("def", &x, &y);
-    x.print_out();
-    y.print_out();
-    z.print_out();
+    std::cout << x << "\n";
+    std::cout << y << "\n";
+    std::cout << z << "\n";
 
     CustomObj obj1{"name1"};
     CustomObj obj2{20, "name2"};
