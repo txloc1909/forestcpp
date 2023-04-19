@@ -2,28 +2,18 @@
 
 #include "custom.h"
 #include "node.h"
+#include "bst.h"
 
 int main() {
-    Node<double> a(1.2f);
-    Node<double> b(1.0f);
-    Node<double> c(2.0f, &a, &b);
-    std::cout << a << "\n";
-    std::cout << b << "\n";
-    std::cout << c << "\n";
-
     Node<std::string> x("xyz");
-    Node<std::string> y("abc");
-    Node<std::string> z("def", &x, &y);
-    std::cout << x << "\n";
-    std::cout << y << "\n";
-    std::cout << z << "\n";
-
     CustomObj obj1{"name1"};
-    CustomObj obj2{20, "name2"};
-    CustomObj obj3{30};
-    std::cout << obj1 << "\n";
-    std::cout << obj2 << "\n";
-    std::cout << obj3 << "\n";
+
+    auto tree1 = BST<double>(1.2f);
+    auto tree2 = BST<std::string>(x);
+    auto tree3 = BST<CustomObj>(obj1);
+    tree1.print_root_val();
+    tree2.print_root_val();
+    tree3.print_root_val();
 
     return 0;
 }

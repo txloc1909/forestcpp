@@ -8,21 +8,32 @@ struct Node {
     Node<T> *left;
     Node<T> *right;
 
-    Node<T>() = delete;
+    Node<T>() {
+        value = T();
+        left = right = nullptr;
+    };
     Node<T>(T val) {
         value = val;
         left = right = nullptr;
     };
-    Node<T>(const Node<T>& another) {
-        value = another.value;
-        left = another.left;
-        right = another.right;
+
+    Node<T>(const Node<T>& other) {
+        value = other.value;
+        left = other.left;
+        right = other.right;
+    };
+    Node<T>& operator=(const Node<T>& other) {
+        this->value = other.value;
+        this->left = other.left;
+        this->right = other.right;
+        return *this;
     }
+
     Node<T>(T val, Node<T>* l, Node<T>* r) {
         value = val; left = l; right = r;
     };
 
-    bool operator=(const Node<T>& other) {
+    bool operator==(const Node<T>& other) {
         return (value == other.value) && (left == other.left) && (right == other.right);
     }
 };
