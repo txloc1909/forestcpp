@@ -1,3 +1,7 @@
+#pragma once
+
+#include <ostream>
+
 template<typename T>
 struct Node {
     T value;
@@ -9,10 +13,18 @@ struct Node {
         value = val;
         left = right = nullptr;
     };
+    Node<T>(const Node<T>& another) {
+        value = another.value;
+        left = another.left;
+        right = another.right;
+    }
     Node<T>(T val, Node<T>* l, Node<T>* r) {
         value = val; left = l; right = r;
     };
 
+    bool operator=(const Node<T>& other) {
+        return (value == other.value) && (left == other.left) && (right == other.right);
+    }
 };
 
 template<typename T>
